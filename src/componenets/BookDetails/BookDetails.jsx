@@ -2,6 +2,13 @@ import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import { addToStoredDB } from '../../Utility/addToDB';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { addWaitToLocalStrogae } from '../../Utility/waitlest';
+
+const MySwal = withReactContent(Swal)
+
+
 const BookDetails = () => {
     const {id}=useParams()
     const covId=parseInt(id)
@@ -10,11 +17,20 @@ const BookDetails = () => {
     const {author,bookName,category,image,publisher,rating,review,tags,totalPages,yearOfPublishing}=singleBook
     // console.log(singleBook)
     //!
-    const hendleMarkAsRead=(id)=>{
+const hendleMarkAsRead=(id)=>{
+        
+MySwal.fire({
+    title: "Good job!",
+    text: "You clicked the button!",
+    icon: "success"
+           });
+addToStoredDB(id)
+}
 
-        addToStoredDB(id)
+const hendleWaitList=(id)=>{
+    addWaitToLocalStrogae(id)
+}
 
-    }
      
 
 
@@ -48,7 +64,7 @@ const BookDetails = () => {
                 </div>
                 
                 <button onClick={()=>hendleMarkAsRead(id)} className="btn btn-outline btn-secondary mr-4 ">Mark as read</button>
-                <button className="btn btn-outline btn-accent">Add to wishList</button>
+                <button onClick={()=>hendleWaitList(id)} className="btn btn-outline btn-accent">Add to wishList</button>
             </div>
         </section>
     );
