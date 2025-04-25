@@ -49,10 +49,6 @@ const ReadList = () => {
 
 
 
-
-
-
-  
     return (
         <div>
           <div>
@@ -64,9 +60,6 @@ const ReadList = () => {
          </ul>
          </details>
           </div>
-
-
-
              <Tabs>
     <TabList>
       <Tab>Book As read</Tab>
